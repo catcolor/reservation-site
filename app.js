@@ -13,10 +13,8 @@ app.set('views', './views')
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 
-app.get('/', (req, res) => {
-  res.send('hello world')
-})
-
 app.listen(PORT, () => {
   console.log(`App is running on http://localhost:${PORT}`)
 })
+
+require('./routes')(app)
