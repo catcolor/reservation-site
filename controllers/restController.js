@@ -8,22 +8,31 @@ const restController = {
     const page = Number(req.query.page) || 1
     const limit = Number(req.query.limit) || DEFAULT_LIMIT
     const offset = getOffset(limit, page)
-    return Restaurant.findAndCountAll({
-      include: Category,
-      limit,
-      offset,
-      nest: true,
-      raw: true
-    }).then(restaurants => {
-      const data = restaurants.rows.map(r => ({
-        ...r,
-        description: r.description.substring(0, 50)
-      }))
-      return res.render('restaurants', {
-        restaurants: data,
-        pagination: getPagination(limit, page, restaurants.count)
+    return Promise.all([
+      Restaurant.findAndCountAll({
+        include: Category,
+        where: {
+          ...categoryId ? { categoryId } : {}
+        },
+        limit,
+        offset,
+        nest: true,
+        raw: true
+      }),
+      Category.findAll({ raw: true })
+    ])
+      .then(([restaurants, categories]) => {
+        const data = restaurants.rows.map(r => ({
+          ...r,
+          description: r.description.substring(0, 50)
+        }))
+        return res.render('restaurants', {
+          restaurants: data,
+          categories,
+          categoryId,
+          pagination: getPagination(limit, page, restaurants.count)
+        })
       })
-    })
       .catch(next)
   }
 }

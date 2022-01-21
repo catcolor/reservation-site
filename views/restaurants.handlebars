@@ -1,11 +1,16 @@
 <div class="d-flex justify-content-start">
-  <div class="input-group-lg mr-3">
-    <select class="form-control" name="categoryId" id="categoryId">
-      <option selected>選擇地區</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle btn-lg mr-3" type="button" id="dropdownMenu2"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      選擇地區
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+      <a class="dropdown-item {{#ifCond '' categoryId}}active{{/ifCond}}" href="?categoryId=">全部</a>
+      {{#each categories}}
+      <a class="dropdown-item {{#ifCond this.id ../categoryId}}active{{/ifCond}}"
+        href="?categoryId={{this.id}}">{{this.name}}</a>
+      {{/each}}
+    </div>
   </div>
 
   <div class="form-group input-group-lg">
@@ -26,8 +31,7 @@
             {{this.name}}
           </a>
         </p>
-        <span class="badge badge-secondary">{{this.Category.name}}</span>
-        <p class="card-text">{{this.description}}</p>
+        <p class="card-text">{{this.Category.name}}{{this.address}}</p>
         <div class="d-flex justify-content-end">
           <button type="button" class="btn btn-info">預約</button>
         </div>
