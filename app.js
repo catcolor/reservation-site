@@ -11,6 +11,7 @@ const app = express()
 const PORT = 3000
 
 const passport = require('./config/passport.js')
+const { getUser } = require('./helpers/auth-helpers')
 
 app.engine('handlebars', engine({ defaultLayout: 'main', helpers: handlebarsHelpers }))
 app.set('view engine', 'handlebars')
@@ -25,6 +26,7 @@ app.use(flash())
 app.use((req, res, next) => {
   res.locals.success_messages = req.flash('success_messages')
   res.locals.error_messages = req.flash('error_messages')
+  res.locals.user = getUser(req)
   next()
 })
 app.use(methodOverride('_method'))
