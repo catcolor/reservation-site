@@ -23,13 +23,13 @@ app.use(session({ secret: 'secret', resave: false, saveUninitialized: false }))
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(flash())
+app.use(methodOverride('_method'))
 app.use((req, res, next) => {
   res.locals.success_messages = req.flash('success_messages')
   res.locals.error_messages = req.flash('error_messages')
   res.locals.user = getUser(req)
   next()
 })
-app.use(methodOverride('_method'))
 
 app.listen(PORT, () => {
   console.log(`App is running on http://localhost:${PORT}`)
