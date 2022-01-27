@@ -1,8 +1,10 @@
-const { Restaurant } = require('../models')
+const { Restaurant, Category } = require('../models')
 const adminController = {
   getRestaurants: (req, res, next) => {
     Restaurant.findAll({
-      raw: true
+      raw: true,
+      nest: true,
+      include: [Category]
     })
       .then(restaurants =>
         res.render('admin/restaurants', { restaurants })
@@ -30,7 +32,9 @@ const adminController = {
   },
   getRestaurant: (req, res, next) => {
     Restaurant.findByPk(req.params.id, {
-      raw: true
+      raw: true,
+      nest: true,
+      include: [Category]
     })
       .then(restaurant => {
         if (!restaurant) throw new Error('餐廳不存在 !')
