@@ -30,8 +30,8 @@ const adminController = {
       categoryId
     })
       .then(() => {
-        req.flash('success_messages', '餐廳成功編輯!')
-        res.redirect('admin/restaurants')
+        req.flash('success_messages', '餐廳成功新增!')
+        res.redirect('/admin/restaurants')
       })
       .catch(next)
   },

@@ -44,6 +44,18 @@ const restController = {
         })
       })
       .catch(next)
+  },
+  getRestaurant: (req, res, next) => {
+    return Restaurant.findByPk(req.params.id, {
+      include: Category,
+      nest: true,
+      raw: true
+    })
+      .then(restaurant => {
+        if (!restaurant) throw new Error('餐廳不存在 ! ')
+        res.render('restaurant', { restaurant })
+      })
+      .catch(next)
   }
 }
 
