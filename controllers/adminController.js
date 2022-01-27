@@ -11,18 +11,23 @@ const adminController = {
       )
       .catch(next)
   },
-  createRestaurant: (req, res) => {
-    return res.render('admin/create-restaurant')
+  createRestaurant: (req, res, next) => {
+    return Category.findAll({
+      raw: true
+    })
+      .then(categories => res.render('admin/create-restaurant', { categories }))
+      .catch(next)
   },
   postRestaurant: (req, res, next) => {
-    const { name, tel, address, openingHours, description } = req.body
+    const { name, tel, address, openingHours, description, categoryId } = req.body
     if (!name) throw new Error('餐廳名稱必填 ! ')
     Restaurant.create({
       name,
       tel,
       address,
       openingHours,
-      description
+      description,
+      categoryId
     })
       .then(() => {
         req.flash('success_messages', '餐廳成功編輯!')
@@ -43,17 +48,20 @@ const adminController = {
       .catch(next)
   },
   editRestaurant: (req, res, next) => {
-    Restaurant.findByPk(req.params.id, {
-      raw: true
-    })
-      .then(restaurant => {
+    Promise.all([
+      Restaurant.findByPk(req.params.id, {
+        raw: true
+      }),
+      Category.findAll({ raw: true })
+    ])
+      .then(([restaurant, categories]) => {
         if (!restaurant) throw new Error('餐廳不存在 !')
-        res.render('admin/edit-restaurant', { restaurant })
+        res.render('admin/edit-restaurant', { restaurant, categories })
       })
       .catch(next)
   },
   putRestaurant: (req, res, next) => {
-    const { name, tel, address, openingHours, description } = req.body
+    const { name, tel, address, openingHours, description, categoryId } = req.body
     if (!name) throw new Error('餐廳名稱必填 !')
     Restaurant.findByPk(req.params.id)
       .then(restaurant => {
@@ -63,7 +71,8 @@ const adminController = {
           tel,
           address,
           openingHours,
-          description
+          description,
+          categoryId
         })
       })
       .then(() => {
