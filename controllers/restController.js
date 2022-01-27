@@ -1,4 +1,4 @@
-const { Restaurant, Category } = require('../models')
+const { Restaurant, Category, User } = require('../models')
 const { getOffset, getPagination } = require('../helpers/pagination-helper')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
@@ -33,7 +33,8 @@ const restController = {
       .then(([restaurants, categories]) => {
         const data = restaurants.rows.map(r => ({
           ...r,
-          description: r.description.substring(0, 50)
+          description: r.description.substring(0, 50),
+          isFavorited: req.user && req.user.FavoritedRestaurants.map(fr => fr.id).includes(r.id)
         }))
         return res.render('restaurants', {
           restaurants: data,
@@ -47,13 +48,17 @@ const restController = {
   },
   getRestaurant: (req, res, next) => {
     return Restaurant.findByPk(req.params.id, {
-      include: Category,
-      nest: true,
-      raw: true
+      include: [
+        Category,
+        { model: User, as: 'FavoritedUsers' }
+      ]
     })
       .then(restaurant => {
         if (!restaurant) throw new Error('餐廳不存在 ! ')
-        res.render('restaurant', { restaurant })
+        res.render('restaurant', {
+          restaurant: restaurant.toJSON(),
+          isFavorited: req.user && req.user.FavoritedRestaurants.map(fr => fr.id).includes(r.id)
+        })
       })
       .catch(next)
   }

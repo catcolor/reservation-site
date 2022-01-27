@@ -45,12 +45,15 @@
         </p>
         <p class="card-text">{{this.Category.name}}{{this.address}}</p>
         <div class="d-flex justify-content-end">
+          {{#if isFavorited}}
           <form action="/favorite/{{this.id}}?_method=DELETE" method="POST">
             <button type="submit" class="btn btn-danger m-1">移除最愛</button>
           </form>
+          {{else}}
           <form action="/favorite/{{this.id}}" method="POST">
             <button type="submit" class="btn btn-primary m-1">加到最愛</button>
           </form>
+          {{/if}}
           <button type="button" class="btn btn-info">預約</button>
         </div>
       </div>
