@@ -1,6 +1,5 @@
 const bcrypt = require('bcryptjs')
-const db = require('../models')
-const { User } = db
+const { User, Restaurant, Favorite } = require('../models')
 const userController = {
   signUpPage: (req, res) => {
     res.render('signup')
@@ -33,6 +32,42 @@ const userController = {
     req.flash('success_messages', '登出成功 ! ')
     req.logout()
     res.redirect('/signin')
+  },
+  addFavorite: (req, res, next) => {
+    const { restaurantId } = req.params
+    return Promise.all([
+      Restaurant.findByPk(restaurantId),
+      Favorite.findOne({
+        where: {
+          userId: req.user.id,
+          restaurantId
+        }
+      })
+    ])
+      .then(([restaurant, favorite]) => {
+        if (!restaurant) throw new Error('餐廳不存在 ! ')
+        if (favorite) throw new Error('已加到最愛')
+        return Favorite.create({
+          userId: req.user.id,
+          restaurantId
+        })
+      })
+      .then(() => res.redirect('back'))
+      .catch(next)
+  },
+  removeFavorite: (req, res, next) => {
+    return Favorite.findOne({
+      where: {
+        userId: req.user.id,
+        restaurantId: req.params.restaurantId
+      }
+    })
+      .then(favorite => {
+        if (!favorite) throw new Error('還沒加到最愛 ! ')
+        return favorite.destroy()
+      })
+      .then(() => res.redirect('back'))
+      .catch(next)
   }
 }
 module.exports = userController
