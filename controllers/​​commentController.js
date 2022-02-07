@@ -1,7 +1,7 @@
 const { Comment, User, Restaurant } = require('../models')
 const commentController = {
   postComment: (req, res, next) => {
-    const { restaurantId, text } = req.body
+    const { restaurantId, text, score } = req.body
     const userId = req.user.id
     if (!text) throw new Error('請輸入評論 ! ')
     return Promise.all([
@@ -14,7 +14,8 @@ const commentController = {
         return Comment.create({
           text,
           restaurantId,
-          userId
+          userId,
+          score
         })
       })
       .then(() => {

@@ -38,6 +38,7 @@
 {{/if}}
 <blockquote class="blockquote mb-0">
   <h4><a href="/users/{{this.User.id}}">{{this.User.name}}</a></h4>
+  <h5 class="mb-2">分數 : {{this.score}}</h5>
   <p>{{this.text}}</p>
   <footer class="blockquote-footer">{{relativeTimeFromNow this.createdAt}}</footer>
 </blockquote>
@@ -45,6 +46,10 @@
 {{/each}}
 
 <form action="/comments" method="POST">
+  <div class="form-row mb-3">
+    <label class="form-label" for="score">分數 : </label>
+    <input class="form-control" type="number" name="score" id="score" placeholder="請輸入 1 ~ 5 的整數" min="1" max="5">
+  </div>
   <div class="form-row mb-3">
     <label class="form-label" for="text">留下評論：</label>
     <textarea class="form-control" id="text" name="text" rows="3"></textarea>
