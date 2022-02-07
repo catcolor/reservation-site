@@ -54,10 +54,15 @@ const restController = {
       ]
     })
       .then(restaurant => {
-        if (!restaurant) throw new Error('餐廳不存在 ! ')
+        // if (!restaurant) throw new Error('餐廳不存在 ! ')
+        const isFavorited = restaurant.FavoritedUsers.some(f => f.id === req.params.id)
+        // console.log('======')
+        // console.log(isFavorited)
+        // console.log(req.user.id)
+        // console.log('======')
         res.render('restaurant', {
           restaurant: restaurant.toJSON(),
-          isFavorited: req.user && req.user.FavoritedRestaurants.map(fr => fr.id).includes(r.id)
+          isFavorited
         })
       })
       .catch(next)
