@@ -12,6 +12,7 @@ const { generalErrorHandler } = require('../middleware/error-handler.js')
 
 router.use('/admin', authenticatedAdmin, admin)
 
+router.delete('/comments/:id', authenticatedAdmin, commentController.deleteComment)
 router.post('/comments', authenticated, commentController.postComment)
 router.post('/favorite/:restaurantId', authenticated, userController.addFavorite)
 router.delete('/favorite/:restaurantId', authenticated, userController.removeFavorite)
