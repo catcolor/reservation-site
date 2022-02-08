@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
         as: 'FavoritedRestaurants'
       })
       User.hasMany(models.Comment, { foreignKey: 'userId' })
+      User.hasMany(models.Reservation, { foreignKey: 'userId' })
     }
   }
   User.init({
