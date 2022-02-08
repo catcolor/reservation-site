@@ -1,0 +1,27 @@
+<h1>預約紀錄</h1>
+<br />
+<br />
+<table class="table align-middle">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">餐廳名稱</th>
+      <th scope="col">日期</th>
+      <th scope="col">人數</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each reservations}}
+    <tr>
+      <th scope="row">{{this.id}}</th>
+      <td>{{this.name}}</td>
+      <td>{{this.time}}</td>
+      <td>
+        <form action="/reservations/{{this.id}}?_method=DELETE" method="POST" style="display: inline;">
+          <button type="submit" class="btn btn-link link-danger">刪除</button>
+        </form>
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
