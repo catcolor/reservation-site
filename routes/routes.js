@@ -14,7 +14,8 @@ const { generalErrorHandler } = require('../middleware/error-handler.js')
 
 router.use('/admin', authenticatedAdmin, admin)
 
-router.get('/reservations/create', authenticated, reservationController.createReservation)
+router.get('/reservations/:id', authenticated, reservationController.createReservation)
+router.post('/reservations/:restaurantId', authenticated, reservationController.addReservation)
 router.get('/reservations', authenticated, reservationController.getReservations)
 
 router.delete('/comments/:id', authenticatedAdmin, commentController.deleteComment)

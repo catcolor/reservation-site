@@ -25,6 +25,24 @@
       <button type="submit" class="btn btn-primary">加到最愛</button>
     </form>
     {{/if}}
+    <form action="/reservations/{{restaurant.id}}" method="POST">
+      <div class="mb-4 text-center">
+        <h1 class="h3 font-weight-normal mb-3">預約</h1>
+      </div>
+      <div class="form-row mb-3">
+        <label class="form-label" for="people">人數</label>
+        <input class="form-control" type="number" name="people" id="people" min="1" max="6" placeholder="Enter address">
+      </div>
+      <div class="form-row mb-3">
+        <label class="form-label" for="time">日期</label>
+        <input class="form-control" type="date" name="time" id="time" placeholder="Enter opening hours">
+      </div>
+      <div class="form-row mb-3">
+        <label class="form-label" for="time">時間</label>
+        <input class="form-control" type="time" name="time" id="time" placeholder="Enter opening hours">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
   </div>
   <hr>
 </div>
