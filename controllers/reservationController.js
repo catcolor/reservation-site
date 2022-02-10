@@ -4,16 +4,13 @@ const reservation = require('../models/reservation')
 const reservationController = {
   getReservations: (req, res, next) => {
     return Reservation.findAll({
-      raw: true
+      raw: true,
+      nest: true,
+      include: [Restaurant]
     })
-      .then(() => res.render('reservations'))
-      .catch(next)
-  },
-  createReservation: (req, res, next) => {
-    return Reservation.findAll({
-      raw: true
-    })
-      .then(() => res.render('create-reservation'))
+      .then(reservations => {
+        res.render('admin/reservations', { reservations })
+      })
       .catch(next)
   },
   addReservation: (req, res, next) => {
@@ -30,13 +27,21 @@ const reservationController = {
     ])
       .then(([restaurant, reservation]) => {
         if (!restaurant) throw new Error("餐廳不存在 ! ")
-        if (reservation) throw new Error("你已預約了 ! ")
         return Reservation.create({
           userId: req.user.id,
           restaurantId,
           people,
           time
         })
+      })
+      .then(() => res.redirect('back'))
+      .catch(next)
+  },
+  removeReservation: (req, res, next) => {
+    return Reservation.findByPk(req.params.id)
+      .then(reservation => {
+        if (!reservation) throw new Error('你還沒預約 ! ')
+        return reservation.destroy()
       })
       .then(() => res.redirect('back'))
       .catch(next)

@@ -25,24 +25,41 @@
       <button type="submit" class="btn btn-primary">加到最愛</button>
     </form>
     {{/if}}
-    <form action="/reservations/{{restaurant.id}}" method="POST">
-      <div class="mb-4 text-center">
-        <h1 class="h3 font-weight-normal mb-3">預約</h1>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+      data-whatever="@mdo">預約</button>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">預約</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="/reservations/{{restaurant.id}}" method="POST">
+              <div class="form-row mb-3">
+                <label class="form-label" for="people">人數</label>
+                <input class="form-control" type="number" name="people" id="people" min="1" max="6"
+                  placeholder="Enter address">
+              </div>
+              <div class="form-row mb-3">
+                <label class="form-label" for="time">日期</label>
+                <input class="form-control" type="date" name="time" id="time" placeholder="Enter opening hours">
+              </div>
+              <div class="form-row mb-3">
+                <label class="form-label" for="time">時間</label>
+                <input class="form-control" type="time" name="time" id="time" placeholder="Enter opening hours">
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+        </div>
       </div>
-      <div class="form-row mb-3">
-        <label class="form-label" for="people">人數</label>
-        <input class="form-control" type="number" name="people" id="people" min="1" max="6" placeholder="Enter address">
-      </div>
-      <div class="form-row mb-3">
-        <label class="form-label" for="time">日期</label>
-        <input class="form-control" type="date" name="time" id="time" placeholder="Enter opening hours">
-      </div>
-      <div class="form-row mb-3">
-        <label class="form-label" for="time">時間</label>
-        <input class="form-control" type="time" name="time" id="time" placeholder="Enter opening hours">
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    </div>
+
   </div>
   <hr>
 </div>

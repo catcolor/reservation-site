@@ -8,5 +8,6 @@ module.exports = {
     return a === b ? options.fn(this) : options.inverse(this)
   },
   currentYear: () => dayjs().year(),
-  relativeTimeFromNow: a => dayjs(a).fromNow()
-}
+  relativeTimeFromNow: a => dayjs(a).fromNow(),
+  dayjs: a => dayjs(a).format('YYYY/MM/DD HH:mm')
+}  

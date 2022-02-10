@@ -6,7 +6,7 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">餐廳名稱</th>
-      <th scope="col">日期</th>
+      <th scope="col">預約日期</th>
       <th scope="col">人數</th>
     </tr>
   </thead>
@@ -14,8 +14,9 @@
     {{#each reservations}}
     <tr>
       <th scope="row">{{this.id}}</th>
-      <td>{{this.name}}</td>
-      <td>{{this.time}}</td>
+      <td>{{this.Restaurant.name}}</td>
+      <td>{{dayjs this.time}}</td>
+      <td>{{this.people}}</td>
       <td>
         <form action="/reservations/{{this.id}}?_method=DELETE" method="POST" style="display: inline;">
           <button type="submit" class="btn btn-link link-danger">刪除</button>
