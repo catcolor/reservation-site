@@ -1,21 +1,18 @@
-<h1>預約紀錄</h1>
+<h1>{{user.name}} 的預約紀錄</h1>
 <br />
 <br />
 <table class="table align-middle">
   <thead class="thead-dark">
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">User ID</th>
       <th scope="col">餐廳名稱</th>
       <th scope="col">預約日期</th>
       <th scope="col">人數</th>
+      <th scope="col">取消預約</th>
     </tr>
   </thead>
   <tbody>
-    {{#each reservations}}
+    {{#each user.Reservations}}
     <tr>
-      <th scope="row">{{this.id}}</th>
-      <td>{{this.userId}}</td>
       <td>{{this.Restaurant.name}}</td>
       <td>{{dayjs this.time}}</td>
       <td>{{this.people}}</td>
@@ -28,3 +25,12 @@
     {{/each}}
   </tbody>
 </table>
+
+<div class="card w-100">
+  <div class="card-header">
+    收藏餐廳
+  </div>
+  <div class="card-body">
+
+  </div>
+</div>

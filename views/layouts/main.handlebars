@@ -21,21 +21,20 @@
             width="30" height="30" class="d-inline-block align-top" alt="好。吃">
           餐廳清單
         </a>
-
+        <a href="/signin"><button class="btn btn-outline-success my-sm-0 my-2">Login</button></a>
         {{#if user}}
-        <ul class="navbar-nav ms-auto mb-2 mb-md-0 text-center">
+        <div class="d-flex justify-content-end">
           {{#if user.isAdmin}}
-          <li class="nav-item">
-            <a href="/admin" class="nav-link">Admin 後台</a>
-          </li>
+          <a href="/admin">
+            <button class="btn btn-light my-sm-0 my-2">Admin 後台</button>
+          </a>
           {{/if}}
-          <li class="nav-item d-inline-flex align-items-center">
-            <span class="text-white nav-link">Hi, {{ user.email }}</span>
-          </li>
-          <li class="nav-item">
-            <a href="/logout"><button class="btn btn-outline-success my-sm-0 my-2">Logout</button></a>
-          </li>
-        </ul>
+          <span class="text-white nav-link">Hi, {{ user.email }}</span>
+          <a href="/users/{{user.id}}">
+            <button class="btn btn-light my-sm-0 my-2 mr-2">Profile</button>
+          </a>
+          <a href="/logout"><button class="btn btn-outline-success my-sm-0 my-2">Logout</button></a>
+        </div>
         {{/if}}
 
       </div>
