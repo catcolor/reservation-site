@@ -21,7 +21,7 @@
             width="30" height="30" class="d-inline-block align-top" alt="好。吃">
           餐廳清單
         </a>
-        <a href="/signin"><button class="btn btn-outline-success my-sm-0 my-2">Login</button></a>
+
         {{#if user}}
         <div class="d-flex justify-content-end">
           {{#if user.isAdmin}}
@@ -34,6 +34,8 @@
             <button class="btn btn-light my-sm-0 my-2 mr-2">Profile</button>
           </a>
           <a href="/logout"><button class="btn btn-outline-success my-sm-0 my-2">Logout</button></a>
+          {{else}}
+          <a href="/signin"><button class="btn btn-outline-success my-sm-0 my-2">Login</button></a>
         </div>
         {{/if}}
 

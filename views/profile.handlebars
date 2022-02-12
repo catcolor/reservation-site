@@ -13,7 +13,11 @@
   <tbody>
     {{#each user.Reservations}}
     <tr>
-      <td>{{this.Restaurant.name}}</td>
+      <td>
+        <a href="/restaurants/{{this.restaurantId}}">
+          {{this.Restaurant.name}}
+        </a>
+      </td>
       <td>{{dayjs this.time}}</td>
       <td>{{this.people}}</td>
       <td>
@@ -31,6 +35,10 @@
     收藏餐廳
   </div>
   <div class="card-body">
-
+    {{#each user.FavoritedRestaurants}}
+    <a href="/restaurants/{{this.id}}">
+      <img class="img-responsive center-block mr-3" src="{{this.image}}" style="width: 100px">
+    </a>
+    {{/each}}
   </div>
 </div>

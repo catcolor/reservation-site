@@ -76,6 +76,7 @@ const userController = {
     return User.findByPk(req.params.id, {
       include: [
         Reservation,
+        { model: Restaurant, as: 'FavoritedRestaurants' },
         { model: Reservation, include: [Restaurant] }
       ]
     })
