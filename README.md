@@ -34,6 +34,7 @@
     npm run dev
     
 6.輸入網址 http://localhost:3000/    
+7.連結網址 https://lit-castle-52295.herokuapp.com/restaurants
 # 帳號
 * 第一組帳號有 admin 權限：
   * email: root@example.com
