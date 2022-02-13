@@ -3,7 +3,7 @@ const faker = require('faker')
 module.exports = {
   async up(queryInterface, Sequelize) {
     const categories = await queryInterface.sequelize.query(
-      'SELECT id FROM Categories;',
+      'SELECT id FROM categories;',
       { type: queryInterface.sequelize.QueryTypes.SELECT }
     )
     await queryInterface.bulkInsert('Restaurants',
