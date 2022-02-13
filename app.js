@@ -8,8 +8,12 @@ const methodOverride = require('method-override')
 const handlebarsHelpers = require('./helpers/handlebars-helpers')
 const bcrypt = require('bcryptjs')
 
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
+
 const app = express()
-const PORT = 3000
+const PORT = process.env.PORT || 3000
 
 const passport = require('./config/passport.js')
 const { getUser } = require('./helpers/auth-helpers')
