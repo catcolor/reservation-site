@@ -14,6 +14,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 const app = express()
 const PORT = process.env.PORT || 3000
+const SESSION_SECRET = 'secret'
 
 const passport = require('./config/passport.js')
 const { getUser } = require('./helpers/auth-helpers')
