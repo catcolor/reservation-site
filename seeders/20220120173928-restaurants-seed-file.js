@@ -2,10 +2,10 @@
 const faker = require('faker')
 module.exports = {
   async up(queryInterface, Sequelize) {
-    const categories = await queryInterface.sequelize.query(
-      'SELECT id FROM categories;',
-      { type: queryInterface.sequelize.QueryTypes.SELECT }
-    )
+    // const categories = await queryInterface.sequelize.query(
+    //   'SELECT id FROM categories;',
+    //   { type: queryInterface.sequelize.QueryTypes.SELECT }
+    // )
     await queryInterface.bulkInsert('Restaurants',
       Array.from({ length: 50 }, () => ({
         name: faker.name.findName(),
@@ -16,7 +16,8 @@ module.exports = {
         description: faker.lorem.text(),
         created_at: new Date(),
         updated_at: new Date(),
-        category_id: categories[Math.floor(Math.random() * categories.length)].id
+        // category_id: categories[Math.floor(Math.random() * categories.length)].id
+        category_id: Math.floor(Math.random() * 7) + 8
       }))
     )
   },
