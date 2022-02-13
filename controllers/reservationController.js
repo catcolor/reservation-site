@@ -16,6 +16,8 @@ const reservationController = {
   addReservation: (req, res, next) => {
     const { restaurantId } = req.params
     const { people, time } = req.body
+    if (!people) throw new Error('請填寫人數!')
+    if (!time) throw new Error('請填寫預約時間!')
     return Promise.all([
       Restaurant.findByPk(restaurantId),
       Reservation.findOne({

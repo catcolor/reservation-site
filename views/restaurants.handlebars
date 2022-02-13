@@ -13,21 +13,6 @@
     </div>
   </div>
 
-  <div class="row" id="search-bar">
-    <div class="col-12">
-      <form action="/restaurants">
-        <div class="input-group mb-3 input-group-lg">
-
-          <input type="text" name="keyword" class="form-control" placeholder="Restaurant name ..."
-            aria-label="Movie Name..." aria-describedby="search-button" value="{{keyword}}">
-          <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="submit" id="search-button">Search</button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-
 </div>
 
 <br />
@@ -54,40 +39,6 @@
             <button type="submit" class="btn btn-primary">加到最愛</button>
           </form>
           {{/if}}
-          <button type="button" class="btn btn-primary ml-2" data-toggle="modal" data-target="#exampleModal"
-            data-whatever="@mdo">預約</button>
-
-          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">預約</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <form action="/reservations/{{this.id}}" method="POST">
-                    <div class="form-row mb-3">
-                      <label class="form-label" for="people">人數</label>
-                      <input class="form-control" type="number" name="people" id="people" min="1" max="6"
-                        placeholder="Enter address">
-                    </div>
-                    <div class="form-row mb-3">
-                      <label class="form-label" for="time">日期</label>
-                      <input class="form-control" type="date" name="time" id="time" placeholder="Enter opening hours">
-                    </div>
-                    <div class="form-row mb-3">
-                      <label class="form-label" for="time">時間</label>
-                      <input class="form-control" type="time" name="time" id="time" placeholder="Enter opening hours">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
 
         </div>
       </div>
