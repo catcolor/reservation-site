@@ -36,8 +36,8 @@
 6.輸入網址 http://localhost:3000/    
 # 帳號
 * 第一組帳號有 admin 權限：
-email: root@example.com
-password: 12345678
+  email: root@example.com
+  password: 12345678
 * 第二組帳號沒有 admin 權限：
 email: user1@example.com
 password: 12345678
